@@ -46,7 +46,7 @@ func (m *Mongo) GetConnection(ctx context.Context) *mongo.Client {
 			var err error
 
 			url := fmt.Sprintf("mongodb://%s/?", m.address)
-			if m.ssl == false {
+			if !m.ssl {
 				url += "&ssl=false"
 			}
 
