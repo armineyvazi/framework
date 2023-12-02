@@ -7,15 +7,13 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+
+	"github.com/armineyvazi/framework.git/pkg/port"
 )
 
 const (
 	serviceName = "mongo_%s"
 )
-
-type Client interface {
-	GetConnection(ctx context.Context) *mongo.Client
-}
 
 type Mongo struct {
 	address    string
@@ -31,7 +29,7 @@ func New(
 	username string,
 	password string,
 	ssl bool,
-) Client {
+) port.MongoDatabase {
 	return &Mongo{
 		address:  address,
 		username: username,
