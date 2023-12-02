@@ -14,6 +14,8 @@ require (
 	github.com/elastic/go-windows v1.0.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/hpcloud/tail v1.0.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/joeshaw/multierror v0.0.0-20140124173710-69b34d4ec901 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
@@ -31,5 +33,6 @@ require (
 	golang.org/x/text v0.7.0 // indirect
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
+	gorm.io/gorm v1.25.5 // indirect
 	howett.net/plist v0.0.0-20181124034731-591f970eefbb // indirect
 )

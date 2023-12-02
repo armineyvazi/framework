@@ -3,22 +3,18 @@ package redis
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/go-redis/redis"
 	"go.elastic.co/apm/module/apmgoredis/v2"
+
+	"github.com/armineyvazi/framework.git/pkg/port"
 )
 
-type Client interface {
-	Get(ctx context.Context, key string) (result string, err error)
-	GetAll(ctx context.Context, keys ...string) (results []string, err error)
-	SearchKeys(ctx context.Context, pattern string) (results []string, err error)
-	HGet(ctx context.Context, key string, field string) (result string, err error)
-	Set(ctx context.Context, key string, data interface{}, exp time.Duration) (err error)
-	BulkSet(ctx context.Context, data map[string]interface{}, exp time.Duration) (err error)
-	HSet(ctx context.Context, key string, field string, data interface{}) (err error)
-	IsHealthy(ctx context.Context) (isHealthy bool)
-}
+const (
+	serviceName = "redis_%s"
+)
 
 type Redis struct {
 	address  string
@@ -26,7 +22,7 @@ type Redis struct {
 	conn     apmgoredis.Client
 }
 
-func New(address, password string, database int) Client {
+func New(address, password string, database int) port.Catch {
 	client := redis.NewClient(&redis.Options{
 		Addr:     address,
 		Password: password,
@@ -128,4 +124,8 @@ func (r *Redis) HSet(ctx context.Context, key string, field string, data interfa
 
 func (r *Redis) IsHealthy(ctx context.Context) (isHealthy bool) {
 	return r.conn.WithContext(ctx).Ping().Err() == nil
+}
+
+func (r *Redis) ServiceName() string {
+	return fmt.Sprintf(serviceName, r.address)
 }
